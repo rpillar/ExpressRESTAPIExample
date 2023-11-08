@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Validator, ValidationError }  = require("express-json-validator-middleware")
+const { Validator }  = require("express-json-validator-middleware")
 
-const API    = require('../utils/apiAuth');
+const API = require('../utils/apiAuth');
 
 const { validate } = new Validator();
 
@@ -23,7 +23,7 @@ const { validate } = new Validator();
 };
 
 // controllers
-const ordersController   = require('../controllers/ordersController');
+const ordersController = require('../controllers/ordersController');
 
 /* orders */
 router.get('/:orderId', API.authenticateKey, ordersController.get_order)
