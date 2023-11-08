@@ -8,7 +8,7 @@ const UserService = require('../service/userService')
   GET user data
 */
 exports.get_users = (req, res) => {
-    let u = UserService.findUser(req.userId)
+    let u = UserService.findUserById(req.userId)
     res.send(u); 
 };
 

@@ -44,13 +44,14 @@ const validationErrorMiddleware = (error, request, response, next) => {
 		errors: error.validationErrors,
 	});
 
-	next();
+  response.send();
 }
-app.use(validationErrorMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/orders', ordersRouter);
+
+app.use(validationErrorMiddleware);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

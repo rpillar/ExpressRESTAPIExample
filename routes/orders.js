@@ -7,19 +7,19 @@ const API = require('../utils/apiAuth');
 const { validate } = new Validator();
 
 /**
- * Define a JSON schema.
+ * Define a orderItem JSON schema.
  */
  const orderItemSchema = {
     type: "object",
     required: ["orderItemId", "quantity"],
     properties: {
         orderItemId: {
-            type: "string",
+            type: "string"
         },
         quantity: {
             type: "string"
         }
-    },
+    }
 };
 
 // controllers

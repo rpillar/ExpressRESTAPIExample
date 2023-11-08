@@ -2,8 +2,8 @@
  * To generate JSDoc - ./node_modules/.bin/jsdoc ordersController.js
 */
 
-const ItemService = require('../service/itemService')
-const OrderService = require('../service/orderService')
+const ItemService = require('../service/itemService');
+const OrderService = require('../service/orderService');
 
 /* 
   GET orders/:orderId
@@ -23,7 +23,7 @@ exports.create_order = (req, res) => {
     let order = OrderService.createOrder(req.userId);
 
     res.status(201).send({ data: order });
-}
+};
 
 /*
  * POST orders/:order_id/line
@@ -59,4 +59,4 @@ exports.add_order_line = (req, res) => {
     let orderLine = OrderService.createOrderLine(orderId, item, quantity, orderIndex);
 
     res.status(201).send();
-}
+};
