@@ -8,8 +8,8 @@ const UserService = require('../service/userService')
   GET user data
 */
 exports.get_users = (req, res) => {
-    let u = UserService.findUserById(req.userId)
-    res.send(u); 
+    let users = UserService.findUserById(req.userId)
+    res.send(users); 
 };
 
 /*
@@ -19,5 +19,5 @@ exports.create_user = (req, res) => {
   let username = req.body.username;
   let user = UserService.createUser(username);
 
-  res.status(201).send({ data: user });
+  res.status(201).send(user);
 };

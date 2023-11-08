@@ -4,15 +4,27 @@ const Orders = require('../utils/initialData').orders
 const OrderLines = require('../utils/initialData').orderLines
 
 /*
+  Cancel an order
+*/
+exports.cancelOrder = (orderIndex) => {
+    Orders[orderIndex].cancelled = true
+
+    return Orders[orderIndex]
+}
+
+/*
   Create a new Order
 */
-exports.createOrder = (_userId) => {
+exports.createOrder = (userId) => {
     let today = new Date().toISOString().split('T')[0];
     let order = {
       _id: uuidv4(),
-      userId: _userId,
+      userId: userId,
       date: today,
-      lines: 0
+      lines: 0,
+      paid: false,
+      fulfilled: false,
+      cancelled: false
     };
   
     Orders.push(order);
@@ -29,18 +41,34 @@ exports.createOrderLine = (orderId, item, quantity, orderIndex) => {
       item: {
           id: item.id,
           quantity: quantity
-      },
-      paid: false,
-      fulfilled: false
+      }
     };
   
     OrderLines.push(orderLine);
 
     // update line count on the order
-    Orders[orderIndex].lines =+ 1
+    Orders[orderIndex].lines += 1
 
     return orderLine;
 };
+
+/*
+  Find the Order index
+*/
+exports.findOrderIndex = (orderId) => {
+    let orderIndex = Orders.findIndex((o) => o._id == orderId)   
+    
+    return orderIndex
+}
+
+/*
+  Find the OrderLines index
+*/
+exports.findOrderItemIndex = (orderItemId) => {
+    let orderItemIndex = OrderLines.findIndex((ol) => ol._id == orderItemId)   
+    
+    return orderItemIndex
+}
 
 /*
   Get order data
@@ -57,10 +85,13 @@ exports.getOrderData = (orderId) => {
 }
 
 /*
-  Find the order index
+  Remove an item from an order
 */
-exports.findOrderIndex = (orderId) => {
-    let orderIndex = Orders.findIndex((o) => o._id == orderId)   
-    
-    return orderIndex
+exports.removeOrderItem = (orderIndex, orderItemIndex) => {
+    let orderItem = OrderLines.splice(orderItemIndex, 1)
+
+    // update line count on the order
+    Orders[orderIndex].lines -= 1
+
+    return
 }

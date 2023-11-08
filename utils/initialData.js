@@ -7,7 +7,10 @@ const orders = [
       _id: "687E047E-7748-11EE-9856-BF1950F20DAD",
       userId: "3FB8CB46-7748-11EE-B82A-FDE3B601D4DF",
       date: "2023-10-10",
-      lines: 0
+      lines: 0,
+      paid: false,
+      fulfilled: false,
+      cancelled: false
   }
 ];
 
@@ -18,9 +21,7 @@ const orderLines = [
     item: {
       id: "654ADF02-78A1-11EE-B908-867666D56F3B",
       quantity: 1
-    },
-    paid: true,
-    fulfilled: true
+    }
   }
 ]
 
@@ -41,15 +42,9 @@ const users = [
   }
 ];
 
-const countries = [
-  { _id: 1, name: "France" },
-  { _id: 2, name: "Italy" },
-];
-
 module.exports = { 
   orders, 
   orderLines, 
   items, 
-  users, 
-  countries 
+  users 
 };
